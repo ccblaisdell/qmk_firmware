@@ -8,6 +8,8 @@ The five different layers are the following:
 
 It's intended to be used in a 5x3 layout with three thumb keys on each side.
 
+## Thumbs and Layers
+
 Left thumbs (left to right):
 
 - CMD
@@ -21,6 +23,20 @@ Right thumbs: (left to right):
 - CMD / Tab
 
 - Press Symbols and Nav at the same time to reach the Fn layer.
+- Fn+H is prev tab
+- Fn+L is next tab
+
+## One shot modifers
+
+With the nav layer pressed, the following keys are one shot modifiers:
+
+- `Z` is Shift
+- `X` is Ctrl
+- `C` is Alt
+- `V` is Cmd
+
+## Combos
+
 - Combos for Ctrl are X+C and ,+.
 - Combos for Alt are C+V and M+,
 - Combo for CAPS_WORD is F+J
