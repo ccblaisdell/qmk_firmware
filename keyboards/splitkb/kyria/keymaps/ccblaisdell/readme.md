@@ -23,8 +23,6 @@ Right thumbs: (left to right):
 - CMD / Tab
 
 - Press Symbols and Nav at the same time to reach the Fn layer.
-- Fn+H is prev tab
-- Fn+L is next tab
 
 ## One shot modifers
 
