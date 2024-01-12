@@ -179,3 +179,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, _NAV, _SYM, _FUNCTION);
 }
+
+#ifdef RGBLIGHT_ENABLE
+void keyboard_post_init_user(void) {
+  rgblight_enable_noeeprom(); // Enables RGB, without saving settings
+  rgblight_sethsv_noeeprom(128, 30, 96);
+  rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+}
+#endif

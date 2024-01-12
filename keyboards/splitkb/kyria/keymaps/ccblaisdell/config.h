@@ -17,10 +17,9 @@
 #pragma once
 
 #ifdef RGBLIGHT_ENABLE
-#    define RGBLIGHT_ANIMATIONS
-#    define RGBLIGHT_HUE_STEP  8
-#    define RGBLIGHT_SAT_STEP  8
-#    define RGBLIGHT_VAL_STEP  8
+#    define RGBLIGHT_DEFAULT_HUE  127
+#    define RGBLIGHT_DEFAULT_SAT  30
+#    define RGBLIGHT_DEFAULT_VAL  30
 #    define RGBLIGHT_LIMIT_VAL 150
 #endif
 
