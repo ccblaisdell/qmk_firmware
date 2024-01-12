@@ -35,10 +35,35 @@ enum layers {
 #define ENT_NAV  LT(_NAV, KC_ENT)
 
 // One shot mods
+#define OS_LSFT OSM(MOD_LSFT)
 #define OS_LCTL OSM(MOD_LCTL)
 #define OS_LALT OSM(MOD_LALT)
 #define OS_LGUI OSM(MOD_LGUI)
-#define OS_LSFT OSM(MOD_LSFT)
+
+// define combo names
+enum combos {
+    COMBO_LCTL,
+    COMBO_LALT,
+    COMBO_RALT,
+    COMBO_RCTL,
+    COMBO_LENGTH // nifty trick to avoid manually specifying how many combos you have
+};
+
+uint16_t COMBO_LEN = COMBO_LENGTH; // nifty trick continued
+
+// define keys that make up combos
+const uint16_t PROGMEM xc_combo[] = {KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM mcomma_combo[] = {KC_M, KC_COMMA, COMBO_END};
+const uint16_t PROGMEM commadot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
+
+// map combo names to their keys and the key they trigger
+combo_t key_combos[] = {
+    [COMBO_LCTL] = COMBO(xc_combo, KC_LCTL),
+    [COMBO_LALT] = COMBO(cv_combo, KC_LALT),
+    [COMBO_RALT] = COMBO(mcomma_combo, KC_RALT),
+    [COMBO_RCTL] = COMBO(commadot_combo, KC_RCTL),
+};
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -71,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |        |      | Prev | Play | Next |VolUp |                              |  ←   |   ↓  |   ↑  |   →  |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |      |      |VolDn |      |      |  |      |      |      |      |      |      |      |        |
+ * |        | Shft | Ctl  | Alt  | GUI  |VolDn |      |      |  |      |      | Home | PgDn | PgUp | End  |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |FKeys |  | Nav  |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -80,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = LAYOUT(
       _______, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                                     KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_DEL ,
       _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLU,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, _______, _______,
-      _______, _______, _______, _______, _______, KC_VOLD, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+      _______, OS_LSFT, OS_LCTL, OS_LALT, OS_LGUI, KC_VOLD, _______, _______, _______, _______, KC_HOME, KC_PGUP, KC_PGDN, KC_END , _______, _______,
                                  _______, _______, _______, _______, FKEYS  , _______, _______, _______, _______, _______
     ),
 
@@ -109,21 +134,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Function Layer: Function keys
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  F9  | F10  | F11  | F12  |      |                              | SAI  | SAD  | HUI  | HUD  |      |        |
+ * |        |  F9  | F10  | F11  | F12  |      |                              |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  F5  |  F6  |  F7  |  F8  |      |                              |      | GUI  | Alt  | Ctrl | Shft |        |
+ * |        |  F5  |  F6  |  F7  |  F8  |      |                              |PrvTab|      |      |NxtTab|      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  F1  |  F2  |  F3  |  F4  |      |      |      |  |      |      | VAI  | VAD  | MOD  | RMOD |      |        |
+ * |        |  F1  |  F2  |  F3  |  F4  |      |      |      |  |      |      |      |      |      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_FUNCTION] = LAYOUT(
-      _______,  KC_F9 ,  KC_F10,  KC_F11,  KC_F12, _______,                                     RGB_SAI, RGB_SAD, RGB_HUI, RGB_HUD , _______, _______,
-      _______,  KC_F5 ,  KC_F6 ,  KC_F7 ,  KC_F8 , _______,                                     _______, OS_LGUI, OS_LCTL, OS_LALT , OS_LSFT, _______,
-      _______,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 , _______, _______, _______, _______, _______, RGB_VAI, RGB_VAD, RGB_MOD, RGB_RMOD, _______, _______,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+      _______,  KC_F9 ,  KC_F10,  KC_F11,  KC_F12, _______,                                     _______, _______  , _______, _______, _______    , _______,
+      _______,  KC_F5 ,  KC_F6 ,  KC_F7 ,  KC_F8 , _______,                                     _______, C(KC_TAB), _______, _______, RCS(KC_TAB), _______,
+      _______,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 , _______, _______, _______, _______, _______, _______, _______  , _______, _______, _______    , _______,
+                                 _______, _______, _______, _______, _______, _______, _______, _______, _______  , _______
     ),
 
 // /*
