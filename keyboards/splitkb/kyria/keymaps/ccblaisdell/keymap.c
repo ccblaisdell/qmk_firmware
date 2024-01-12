@@ -46,6 +46,7 @@ enum combos {
     COMBO_LALT,
     COMBO_RALT,
     COMBO_RCTL,
+    COMBO_FJ,
     COMBO_LENGTH // nifty trick to avoid manually specifying how many combos you have
 };
 
@@ -56,6 +57,7 @@ const uint16_t PROGMEM xc_combo[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM mcomma_combo[] = {KC_M, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM commadot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
+const uint16_t PROGMEM fj_combo[] = {KC_F, KC_J, COMBO_END};
 
 // map combo names to their keys and the key they trigger
 combo_t key_combos[] = {
@@ -63,6 +65,7 @@ combo_t key_combos[] = {
     [COMBO_LALT] = COMBO(cv_combo, KC_LALT),
     [COMBO_RALT] = COMBO(mcomma_combo, KC_RALT),
     [COMBO_RCTL] = COMBO(commadot_combo, KC_RCTL),
+    [COMBO_FJ]   = COMBO(fj_combo, CW_TOGG),
 };
 
 // clang-format off
@@ -134,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Function Layer: Function keys
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  F9  | F10  | F11  | F12  |      |                              |      |      |      |      |      |        |
+ * |        |  F9  | F10  | F11  | F12  |      |                              |NxtWin|      |      |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |        |  F5  |  F6  |  F7  |  F8  |      |                              |PrvTab|      |      |NxtTab|      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -145,7 +148,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_FUNCTION] = LAYOUT(
-      _______,  KC_F9 ,  KC_F10,  KC_F11,  KC_F12, _______,                                     _______    , _______, _______, _______  , _______, _______,
+      _______,  KC_F9 ,  KC_F10,  KC_F11,  KC_F12, _______,                                     G(KC_TILDE), _______, _______, _______  , _______, _______,
       _______,  KC_F5 ,  KC_F6 ,  KC_F7 ,  KC_F8 , _______,                                     RCS(KC_TAB), _______, _______, C(KC_TAB), _______, _______,
       _______,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 , _______, _______, _______, _______, _______, _______    , _______, _______, _______  , _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______    , _______, _______
