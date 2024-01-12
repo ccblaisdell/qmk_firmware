@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                                     KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_DEL ,
       _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLU,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, _______, _______,
       _______, OS_LSFT, OS_LCTL, OS_LALT, OS_LGUI, KC_VOLD, _______, _______, _______, _______, KC_HOME, KC_PGUP, KC_PGDN, KC_END , _______, _______,
-                                 _______, _______, _______, _______, FKEYS  , _______, _______, _______, _______, _______
+                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
 /*
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE,                                     KC_ASTR, KC_EQL , KC_GT  , KC_BSLS, KC_SLSH, _______,
       _______, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_PLUS, KC_MINS, KC_QUOT, KC_DQUO, KC_COLN, _______,
       _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD, _______, _______, _______, _______, KC_AMPR, KC_UNDS, KC_LT  , KC_GT  , KC_QUES, _______,
-                                 _______, _______, _______, _______, _______, FKEYS  , KC_BSPC, _______, _______, _______
+                                 _______, _______, _______, _______, _______, _______, KC_BSPC, _______, _______, _______
     ),
 
 /*
@@ -145,10 +145,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_FUNCTION] = LAYOUT(
-      _______,  KC_F9 ,  KC_F10,  KC_F11,  KC_F12, _______,                                     _______, _______  , _______, _______, _______    , _______,
-      _______,  KC_F5 ,  KC_F6 ,  KC_F7 ,  KC_F8 , _______,                                     _______, C(KC_TAB), _______, _______, RCS(KC_TAB), _______,
-      _______,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 , _______, _______, _______, _______, _______, _______, _______  , _______, _______, _______    , _______,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______  , _______
+      _______,  KC_F9 ,  KC_F10,  KC_F11,  KC_F12, _______,                                     _______    , _______, _______, _______  , _______, _______,
+      _______,  KC_F5 ,  KC_F6 ,  KC_F7 ,  KC_F8 , _______,                                     RCS(KC_TAB), _______, _______, C(KC_TAB), _______, _______,
+      _______,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 , _______, _______, _______, _______, _______, _______    , _______, _______, _______  , _______, _______,
+                                 _______, _______, _______, _______, _______, _______, _______, _______    , _______, _______
     ),
 
 // /*
@@ -172,3 +172,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 //     ),
 };
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+  return update_tri_layer_state(state, _NAV, _SYM, _FUNCTION);
+}
