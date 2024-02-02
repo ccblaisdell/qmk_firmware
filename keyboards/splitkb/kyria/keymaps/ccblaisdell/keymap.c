@@ -80,8 +80,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |LShift|LShift|  | Fkeys|RShift|   N  |   M  | ,  < | . >  | /  ? | RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | LCtl | LCtl | LGui |LShift| Sym  |  | Nav  |Space | GUI/ | LAlt | RAlt |
- *                        |      |      |      |      |      |  |      |      | Tab  |      |      |
+ *                        | LCtl | LCtl | LGui |LShift| Sym/ |  | Nav/ |Space | GUI/ | LAlt | RAlt |
+ *                        |      |      |      |      | Esc  |  | Ent  |      | Tab  |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
